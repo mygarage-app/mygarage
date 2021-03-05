@@ -1,2 +1,0 @@
-# mygarage
-My Garage App
