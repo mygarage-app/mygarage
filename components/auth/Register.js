@@ -15,11 +15,17 @@ export class Register extends Component {
         }
         this.onSignUp = this.onSignUp.bind(this)
     }
-    onSignUp()
+    onSignUp() //TODO: change database to production mode
     {
         const { email, password, name } = this.state;
         firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then((result) => {
+        .then((result) => { // Store user here
+            firebase.firestore().collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .set({
+                name,
+                email
+            })
             console.log(result)
         })
         .catch((error) => {
